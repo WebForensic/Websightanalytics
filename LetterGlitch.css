@@ -1,0 +1,30 @@
+
+.glitch-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0;
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+
+.glitch-text {
+  font-size: 4rem;
+  font-weight: bold;
+  color: rgba(255, 255, 0, 0.08);
+  letter-spacing: 0.1em;
+  mix-blend-mode: overlay;
+}
+
+.center-vignette::before,
+.outer-vignette::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent, #000);
+  pointer-events: none;
+}

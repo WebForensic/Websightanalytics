@@ -1,0 +1,38 @@
+
+.focus-container {
+  position: relative;
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 100vh;
+  z-index: 10;
+}
+
+.focus-word {
+  font-size: 3rem;
+  font-weight: bold;
+  color: yellow;
+  transition: filter 0.3s ease;
+}
+
+.focus-frame {
+  position: absolute;
+  top: 0; left: 0;
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border: 3px solid var(--border-color);
+  filter: drop-shadow(0 0 4px var(--border-color));
+  border-radius: 3px;
+}
+
+.top-left { top: -10px; left: -10px; border-right: none; border-bottom: none; }
+.top-right { top: -10px; right: -10px; border-left: none; border-bottom: none; }
+.bottom-left { bottom: -10px; left: -10px; border-right: none; border-top: none; }
+.bottom-right { bottom: -10px; right: -10px; border-left: none; border-top: none; }
