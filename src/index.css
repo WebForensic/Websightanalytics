@@ -1,0 +1,5 @@
+/* Example: /src/index.css or tailwind overrides */
+canvas {
+  z-index: 9999;
+  pointer-events: none;
+}
