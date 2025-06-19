@@ -1,0 +1,23 @@
+const InsightStrip = () => {
+  const insights = [
+    "Client A identified 22 hidden issues in 3.1 seconds",
+    "Analytics sync triggered by conversion drop at 4:12PM",
+    "Vendor B charged for unused scripts: flagged",
+    "Heatmap anomaly: 87% drop on checkout page",
+    "DNS latency resolved — response time improved 54%",
+  ];
+
+  return (
+    <section className="bg-neutral-950 py-6 px-4 border-t border-neutral-800">
+      <div className="overflow-hidden whitespace-nowrap text-cyan-400 text-sm font-mono animate-marquee">
+        {insights.map((msg, i) => (
+          <span key={i} className="mx-6 inline-block">
+            {msg}
+          </span>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default InsightStrip;

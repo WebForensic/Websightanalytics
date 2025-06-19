@@ -5,7 +5,7 @@ const MainSite = () => {
     <div className="w-full min-h-screen bg-black text-white px-6 py-20 font-sans">
       <div className="max-w-6xl mx-auto text-center space-y-12">
         <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight">
-          WebSight Analytics
+      
         </h1>
         <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
           Most businesses don’t need a new website. They need to know where the
