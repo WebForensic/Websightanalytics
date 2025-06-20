@@ -1,51 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
 import ClickSpark from './effects/ClickSpark';
 import LetterGlitch from './effects/LetterGlitch';
-import HeroSection from './components/HeroSection';
-import AuditModules from './components/AuditModules';
-import InsightStrip from './components/InsightStrip';
-import Testimonials from './components/Testimonials';
+import HyperSpeed from './effects/HyperSpeed';
+
+import Particles from './effects/Particles';
+import StarBorder from './effects/StarBorder';
+
+import AnalyticsHero from './components/AnalyticsHero';
+import AuditPreview from './components/AuditPreview';
+import WhatYourePayingFor from './components/WhatYourePayingFor';
+import WebGuyMyth from './components/WebGuyMyth';
+import WhatWeDo from './components/WhatWeDo';
+import WhoThisIsFor from './components/WhoThisIsFor';
 import FinalCTA from './components/FinalCTA';
-import { motion } from 'framer-motion';
+import Footer from './components/Footer';
 
-const App = () => {
+function App() {
+  const [phase, setPhase] = useState('glitch'); // 'glitch' → 'hyperspeed' → 'main'
+
+  useEffect(() => {
+    const glitchTimer = setTimeout(() => setPhase('hyperspeed'), 10000); // 10s glitch
+    const hyperspeedTimer = setTimeout(() => setPhase('main'), 13500); // 3.5s hyper
+
+    return () => {
+      clearTimeout(glitchTimer);
+      clearTimeout(hyperspeedTimer);
+    };
+  }, []);
+
   return (
-    <div className="bg-black text-white min-h-screen w-full relative overflow-hidden font-sans">
-      <ClickSpark
-        sparkColor="#00ffff"
-        sparkSize={5}
-        sparkRadius={20}
-        sparkCount={10}
-        duration={400}
-        easing="ease-out"
-        extraScale={1.0}
-      >
-        {/* Intro Glitch Overlay */}
-        <motion.div
-          className="fixed inset-0 z-50"
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 0 }}
-          transition={{ delay: 6, duration: 1 }}
-        >
-          <LetterGlitch glitchSpeed={40} centerVignette={true} />
-        </motion.div>
+    <div className="relative w-full min-h-screen bg-black text-white font-sans overflow-hidden">
+      <ClickSpark />
+      <Particles className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none" />
 
-        {/* Main Site Content */}
-        <motion.div
-          className="relative z-10"
-          initial={{ opacity: 0, y: 80 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 7, duration: 1 }}
-        >
-          <HeroSection />
-          <AuditModules />
-          <InsightStrip />
-          <Testimonials />
-          <FinalCTA />
-        </motion.div>
-      </ClickSpark>
+      {phase === 'glitch' && <LetterGlitch />}
+      {phase === 'hyperspeed' && <HyperSpeed />}
+
+      {phase === 'main' && (
+        <StarBorder>
+          <div className="relative z-10">
+            <AnalyticsHero />
+            <AuditPreview />
+            <WhatYourePayingFor />
+            <WebGuyMyth />
+            <WhatWeDo />
+            <WhoThisIsFor />
+            <FinalCTA />
+            <Footer />
+          </div>
+        </StarBorder>
+      )}
     </div>
   );
-};
+}
 
 export default App;

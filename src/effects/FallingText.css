@@ -1,0 +1,10 @@
+.word {
+  display: inline-block;
+  margin: 0 0.2rem;
+  transition: transform 0.3s ease;
+}
+
+.highlighted {
+  color: #00ffff;
+  font-weight: bold;
+}

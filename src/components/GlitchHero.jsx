@@ -25,4 +25,6 @@ const GlitchHero = ({ onFinish }) => {
   );
 };
 
+import React from 'react';
+
 export default GlitchHero;

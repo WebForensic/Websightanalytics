@@ -20,4 +20,6 @@ const Testimonials = () => {
   );
 };
 
+import React from 'react';
+
 export default Testimonials;

@@ -18,4 +18,6 @@ const AuditModules = () => {
   );
 };
 
+import React from 'react';
+
 export default AuditModules;

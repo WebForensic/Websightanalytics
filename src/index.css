@@ -2,18 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .animate-marquee {
-    animation: marquee 30s linear infinite;
-    will-change: transform;
-  }
+/* Ensure full screen black background */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: #fff;
+  font-family: sans-serif;
+}
 
-  @keyframes marquee {
-    0% {
-      transform: translateX(100%);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
+/* Global Text Styling */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold text-white;
+}
+
+p {
+  @apply text-gray-300;
+}
+
+button {
+  @apply bg-cyan-500 text-black font-semibold py-2 px-4 rounded hover:bg-cyan-400 transition duration-200;
+}
+
+/* LetterGlitch Overlay Container */
+#letter-glitch-container {
+  @apply fixed inset-0 bg-black z-50 flex items-center justify-center transition-opacity duration-1000;
+}
+
+/* Twinkle Effect for StarBorder */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
   }
 }

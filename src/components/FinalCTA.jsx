@@ -1,18 +1,24 @@
-import StarBorder from './StarBorder';
+import React from 'react';
 
 const FinalCTA = () => {
   return (
-    <section className="py-20 px-6 bg-black text-center">
-      <h2 className="text-4xl font-bold mb-6">Ready to See the Truth?</h2>
-      <p className="text-gray-400 mb-8">
-        Run a forensic-grade scan of your website in under 2 minutes.
-      </p>
-
-      <StarBorder>
-        <button className="px-8 py-4 text-cyan-400 font-bold text-lg border border-cyan-400 rounded-lg bg-black hover:scale-105 transition duration-300">
-          Initiate Scan
-        </button>
-      </StarBorder>
+    <section className="w-full bg-gray-900 text-white py-20 px-6 font-sans">
+      <div className="max-w-4xl mx-auto text-center space-y-8">
+        <h2 className="text-4xl md:text-5xl font-bold">
+          Still Not Sure? Let the Data Speak.
+        </h2>
+        <p className="text-lg text-gray-300">
+          If your site isn’t showing up, converting, or paying you back — something’s broken. We’ll find it.
+        </p>
+        <div className="flex flex-col md:flex-row justify-center gap-6">
+          <button className="bg-green-500 hover:bg-green-600 text-black font-bold py-3 px-6 rounded-xl transition">
+            Run a $250 Visibility Scan
+          </button>
+          <a href="mailto:forensic.team@websightanalytics.com" className="border border-white hover:border-green-500 hover:text-green-400 py-3 px-6 rounded-xl transition">
+            Email Our Forensic Team
+          </a>
+        </div>
+      </div>
     </section>
   );
 };

@@ -7,9 +7,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "framer-motion": "^12.18.1",
     "matter-js": "^0.20.0",
+    "ogl": "^1.0.11",
+    "postprocessing": "^6.37.4",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "three": "^0.177.0"
   },
   "devDependencies": {
     "@types/matter-js": "^0.19.8",
