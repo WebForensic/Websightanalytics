@@ -1,0 +1,27 @@
+/* TrueFocus.css */
+.focus-container {
+  position: relative;
+  display: inline-block;
+}
+.focus-word {
+  position: relative;
+  transition: filter 0.5s;
+}
+.focus-frame {
+  pointer-events: none;
+  position: absolute;
+  border: 2px solid var(--border-color, #61dca3);
+  box-shadow: 0 0 24px var(--glow-color, #61dca3);
+  border-radius: 8px;
+  z-index: 10;
+}
+.corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: transparent;
+}
+.corner.top-left { top: -2px; left: -2px; border-top: 2px solid var(--border-color); border-left: 2px solid var(--border-color);}
+.corner.top-right { top: -2px; right: -2px; border-top: 2px solid var(--border-color); border-right: 2px solid var(--border-color);}
+.corner.bottom-left { bottom: -2px; left: -2px; border-bottom: 2px solid var(--border-color); border-left: 2px solid var(--border-color);}
+.corner.bottom-right { bottom: -2px; right: -2px; border-bottom: 2px solid var(--border-color); border-right: 2px solid var(--border-color);}

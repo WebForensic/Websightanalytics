@@ -1,83 +1,91 @@
-import React, { useEffect, useState } from 'react';
+// src/effects/ClickSpark.jsx
+import React, { useRef, useEffect } from "react";
+import "./ClickSpark.css"; // Ensure this CSS file exists if needed
 
-const ClickSpark = () => {
-  const [sparks, setSparks] = useState([]);
+const ClickSpark = ({
+  sparkColor = "#fff",
+  sparkSize = 10,
+  sparkRadius = 15,
+  sparkCount = 8,
+  duration = 400,
+  children,
+}) => {
+  const canvasRef = useRef(null);
+  const sparksRef = useRef([]);
 
   useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
     const handleClick = (e) => {
-      const newSpark = {
-        id: Date.now() + Math.random(),
-        x: e.clientX,
-        y: e.clientY,
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Create sparks
+      sparksRef.current = [];
+      for (let i = 0; i < sparkCount; i++) {
+        sparksRef.current.push({
+          x: x,
+          y: y,
+          vx: (Math.random() - 0.5) * sparkRadius,
+          vy: (Math.random() - 0.5) * sparkRadius,
+          life: duration,
+          size: sparkSize * (0.5 + Math.random()),
+        });
+      }
+
+      const animate = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let allDead = true;
+
+        sparksRef.current.forEach((spark, index) => {
+          if (spark.life > 0) {
+            allDead = false;
+            spark.life -= 16; // Approx 60fps frame time
+            spark.x += spark.vx;
+            spark.y += spark.vy;
+            spark.vy += 0.2; // Gravity effect
+
+            ctx.fillStyle = sparkColor;
+            ctx.beginPath();
+            ctx.arc(spark.x, spark.y, spark.size * (spark.life / duration), 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            sparksRef.current.splice(index, 1);
+          }
+        });
+
+        if (!allDead) {
+          requestAnimationFrame(animate);
+        }
       };
-      
-      setSparks(prev => [...prev, newSpark]);
-      
-      // Remove spark after animation
-      setTimeout(() => {
-        setSparks(prev => prev.filter(spark => spark.id !== newSpark.id));
-      }, 600);
+      animate();
     };
 
-    document.addEventListener('click', handleClick);
-    return () => document.removeEventListener('click', handleClick);
-  }, []);
+    canvas.addEventListener("click", handleClick);
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      canvas.removeEventListener("click", handleClick);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [sparkColor, sparkSize, sparkRadius, sparkCount, duration]);
 
   return (
-    <>
-      {sparks.map(spark => (
-        <div
-          key={spark.id}
-          className="spark"
-          style={{
-            left: spark.x,
-            top: spark.y,
-          }}
-        >
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className="spark-particle"
-              style={{
-                '--angle': `${(360 / 8) * i}deg`,
-                '--delay': `${i * 0.05}s`,
-              }}
-            />
-          ))}
-        </div>
-      ))}
-      
-      <style jsx>{`
-        .spark {
-          position: fixed;
-          pointer-events: none;
-          z-index: 9999;
-          transform: translate(-50%, -50%);
-        }
-        
-        .spark-particle {
-          position: absolute;
-          width: 4px;
-          height: 4px;
-          background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4d9de0);
-          border-radius: 50%;
-          animation: sparkle 0.6s ease-out forwards;
-          animation-delay: var(--delay);
-          transform: rotate(var(--angle));
-        }
-        
-        @keyframes sparkle {
-          0% {
-            opacity: 1;
-            transform: rotate(var(--angle)) translateY(0) scale(1);
-          }
-          100% {
-            opacity: 0;
-            transform: rotate(var(--angle)) translateY(-30px) scale(0);
-          }
-        }
-      `}</style>
-    </>
+    <div style={{ position: "relative" }}>
+      <canvas ref={canvasRef} className="click-spark-canvas" style={{ position: "absolute", top: 0, left: 0, zIndex: 400 }} />
+      {children}
+    </div>
   );
 };
 
