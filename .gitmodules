@@ -1,3 +1,2 @@
-[submodule "magic-portfolio"]
-    path = magic-portfolio
+
     url = https://github.com/WebForensic/magic-portfolio.git
