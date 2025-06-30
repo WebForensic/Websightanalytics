@@ -20,15 +20,15 @@ const FallingText = ({
 
   const [effectStarted, setEffectStarted] = useState(false);
 
-  useEffect(() => {
+   useEffect(() => {
     if (!textRef.current) return;
-    const words = text.split(" ");
-    const newHTML = words
-      .map((word) => {
-        const isHighlighted = highlightWords.some((hw) => word.startsWith(hw));
-        return `<span class="word ${isHighlighted ? highlightClass : ""}">${word}</span>`;
+    const letters = text.split(""); // Split by letter!
+    const newHTML = letters
+      .map((letter, i) => {
+        const displayChar = letter === " " ? "&nbsp;" : letter;
+        return `<span class="word ${letter === " " ? "" : highlightClass}">${displayChar}</span>`;
       })
-      .join(" ");
+      .join("");
     textRef.current.innerHTML = newHTML;
   }, [text, highlightWords, highlightClass]);
 
